@@ -1,0 +1,19 @@
+services:
+  portfolio:
+    image: example/react-portfolio:latest
+    container_name: portfolio-example
+    restart: unless-stopped
+
+    environment:
+      NODE_ENV: production
+      PUBLIC_URL: ${PUBLIC_URL}
+
+    networks:
+      - web-network
+
+    ports:
+      - "127.0.0.1:8080:80"
+
+networks:
+  web-network:
+    driver: bridge

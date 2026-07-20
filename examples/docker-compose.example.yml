@@ -1,0 +1,30 @@
+services:
+  application:
+    image: example/application:latest
+    container_name: example-application
+    restart: unless-stopped
+
+    environment:
+      APP_ENV: production
+      APP_SECRET: ${APP_SECRET}
+
+    volumes:
+      - application-data:/app/data
+
+    networks:
+      - web-network
+      - internal-network
+
+    ports:
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  application-data:
+
+networks:
+  web-network:
+    driver: bridge
+
+  internal-network:
+    driver: bridge
+    internal: true

@@ -1,0 +1,18 @@
+services:
+  unifi-network-application:
+    image: example/unifi-network-application:latest
+    container_name: unifi-example
+    restart: unless-stopped
+
+    volumes:
+      - unifi-data:/config
+
+    networks:
+      - management-network
+
+volumes:
+  unifi-data:
+
+networks:
+  management-network:
+    driver: bridge

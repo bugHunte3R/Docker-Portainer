@@ -7,7 +7,7 @@ The Docker host of my Proxmox homelab: an unprivileged Debian LXC running real w
 | | |
 |---|---|
 | **Status** | In production in my homelab |
-| **Stack** | Debian 12 LXC (Proxmox VE) · Docker Engine · Docker Compose · Portainer CE · Nginx · PostgreSQL |
+| **Stack** | Debian 12 LXC (Proxmox VE) · Docker Engine · Docker Compose · Portainer CE · Node.js · PostgreSQL |
 | **Related** | [Proxmox homelab](https://github.com/bugHunte3R/Proxmox) · [Portfolio](https://github.com/bugHunte3R/React-Portfolio-V3) · [Cloudflare Zero Trust](https://github.com/bugHunte3R/Cloudflare-zerotrust) |
 
 ## Architecture
@@ -16,8 +16,7 @@ The Docker host of my Proxmox homelab: an unprivileged Debian LXC running real w
 
 | Workload | How it runs | Exposure |
 |---|---|---|
-| Portfolio (React build on Nginx) | Container, multi-stage image | Public via Cloudflare Tunnel |
-| Portfolio contact API (Node.js / Express) | systemd service on the host | Internal, behind Nginx `/api/` |
+| Portfolio (React build + Express API) | Container, multi-stage image, bind-mounted data and media | Public via Cloudflare Tunnel |
 | InvoiceShelf + PostgreSQL | Compose project, named volume, health checks | Private network only |
 | Portainer CE | Container | Private network only |
 | Lab stacks (Firefly III, Actual Budget, Nginx Proxy Manager, Prometheus + Grafana) | Compose projects kept for testing | Started on demand |
@@ -28,9 +27,10 @@ Network devices (UniFi) are **not** on this host: the UniFi OS Server runs in it
 
 - Ran Docker inside an unprivileged LXC (`nesting` + `keyctl`) to keep the whole host snapshot-able from Proxmox
 - One Compose project per application, each with its own network and named volumes
-- Multi-stage builds (Node build → Nginx runtime) for small production images
+- Multi-stage builds (build stage → slim runtime with production dependencies only)
 - `restart: unless-stopped` + container health checks; secrets in `.env` files outside Git
-- Kept the old image tagged before every redesign of the portfolio for instant rollback
+- Releases tested in a temporary container first; the previous image stays tagged for instant rollback
+- Retired a legacy host-level API service once the portfolio container took over its role
 - Regular cleanup (`docker image prune`, builder cache) to protect a 24 GB root disk
 
 ## Fictional addressing used in this repository

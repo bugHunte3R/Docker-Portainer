@@ -20,7 +20,7 @@ Node.js build image
 React production build
         |
         v
-Nginx runtime image
+Node.js runtime image (Express)
 ```
 
 ## InvoiceShelf
@@ -29,9 +29,9 @@ Invoicing application with a dedicated PostgreSQL container on its own Compose n
 
 Its interface remains private.
 
-## Contact API
+## Portfolio API
 
-The portfolio contact form API (Node.js / Express) runs as a systemd service on the host and is reached only through the portfolio Nginx `/api/` location.
+The portfolio container runs Express, which serves the React build, the rate-limited contact form API and the admin API used to manage projects.
 
 ## Network controller
 

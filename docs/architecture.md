@@ -21,7 +21,7 @@ Proxmox VE
     ├── Docker Compose
     ├── Portainer
     ├── React Portfolio
-    ├── UniFi Network Application
+    ├── InvoiceShelf + PostgreSQL
     ├── Additional Services
     ├── Docker Networks
     └── Persistent Storage

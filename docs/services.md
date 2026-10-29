@@ -6,7 +6,7 @@
 |---|---|---|---|
 | Portainer | Management | Private | Docker container |
 | React Portfolio | Public web | Public through tunnel | Docker Compose |
-| UniFi Network Application | Network management | Private | Docker container |
+| InvoiceShelf + PostgreSQL | Invoicing | Private | Docker Compose, named volume, health checks |
 | Additional Web Services | Applications | Selected | Docker Compose |
 
 ## React Portfolio
@@ -23,11 +23,19 @@ React production build
 Nginx runtime image
 ```
 
-## UniFi Network Application
+## InvoiceShelf
 
-The UniFi service uses persistent storage for configuration and application data.
+Invoicing application with a dedicated PostgreSQL container on its own Compose network. Database data lives in a named volume; both containers have health checks.
 
-Its administrative interface remains private.
+Its interface remains private.
+
+## Contact API
+
+The portfolio contact form API (Node.js / Express) runs as a systemd service on the host and is reached only through the portfolio Nginx `/api/` location.
+
+## Network controller
+
+The UniFi OS Server is deliberately **not** on this Docker host: it runs in its own LXC so it can be backed up and upgraded independently.
 
 ## Portainer
 

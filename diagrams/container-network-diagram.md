@@ -9,12 +9,12 @@ flowchart LR
 
     Portfolio[Portfolio]
     Portainer[Portainer]
-    UniFi[UniFi]
+    Invoice[InvoiceShelf + PostgreSQL]
     Supporting[Supporting Services]
 
     Tunnel --> WebNet
     WebNet --> Portfolio
     MgmtNet --> Portainer
-    InternalNet --> UniFi
+    InternalNet --> Invoice
     InternalNet --> Supporting
 ```

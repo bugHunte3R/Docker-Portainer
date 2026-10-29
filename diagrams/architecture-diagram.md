@@ -7,13 +7,13 @@ flowchart TB
     Docker[Docker Engine]
     Portainer[Portainer]
     Portfolio[React Portfolio]
-    UniFi[UniFi Network Application]
+    Invoice[InvoiceShelf + PostgreSQL]
     Other[Additional Services]
 
     Proxmox --> LXC
     LXC --> Docker
     Docker --> Portainer
     Docker --> Portfolio
-    Docker --> UniFi
+    Docker --> Invoice
     Docker --> Other
 ```

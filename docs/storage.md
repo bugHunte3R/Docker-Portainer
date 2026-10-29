@@ -24,7 +24,7 @@ Used when the administrator needs direct access to files from the host.
 |---|---|
 | `portainer-data` | Portainer configuration |
 | `portfolio-data` | Application data if required |
-| `unifi-data` | UniFi configuration |
+| `invoiceshelf-postgres-data` | InvoiceShelf database |
 | `application-data` | Generic persistent data |
 
 These names are documentation examples.
